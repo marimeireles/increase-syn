@@ -1,6 +1,6 @@
 torch
 torchvision
-transformers
+transformers>=4.53.0
 accelerate
 numpy
 scipy
@@ -9,3 +9,8 @@ seaborn
 tqdm
 pandas
 pytest
+peft
+trl
+bitsandbytes
+datasets
+scikit-learn

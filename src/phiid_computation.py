@@ -98,6 +98,8 @@ def compute_all_pairs_phiid(activations, num_heads, tau=1,
         sts_matrix: np.ndarray of shape (num_heads, num_heads) — synergy values
         rtr_matrix: np.ndarray of shape (num_heads, num_heads) — redundancy values
     """
+    import os
+
     pairs = list(combinations(range(num_heads), 2))
     total_pairs = len(pairs)
     logger.info(f"Computing PhiID for {total_pairs} head pairs with {max_workers} workers")
@@ -105,20 +107,25 @@ def compute_all_pairs_phiid(activations, num_heads, tau=1,
     sts_matrix = np.zeros((num_heads, num_heads))
     rtr_matrix = np.zeros((num_heads, num_heads))
 
-    # Check for existing checkpoint
-    completed = 0
+    # Track completed pairs by their actual (i,j) indices using a boolean matrix.
+    # This fixes a bug where ProcessPoolExecutor + as_completed() returns results
+    # out-of-order, making linear counter-based checkpointing incorrect on resume.
+    completed_mask = np.zeros((num_heads, num_heads), dtype=bool)
+
     if save_path is not None:
-        import os
         ckpt_path = save_path.replace('.npz', '_checkpoint.npz')
         if os.path.exists(ckpt_path):
             ckpt = np.load(ckpt_path)
             sts_matrix = ckpt['sts_matrix']
             rtr_matrix = ckpt['rtr_matrix']
-            completed = int(ckpt['completed'])
-            logger.info(f"Resuming from checkpoint: {completed}/{total_pairs} pairs done")
+            completed_mask = ckpt['completed_mask']
+            num_done = int(completed_mask.sum())
+            logger.info(f"Resuming from checkpoint: {num_done}/{total_pairs} pairs done")
 
-    # Prepare work items (skip already completed)
-    remaining_pairs = pairs[completed:]
+    # Filter to only uncomputed pairs
+    remaining_pairs = [(i, j) for (i, j) in pairs if not completed_mask[i, j]]
+    num_already_done = total_pairs - len(remaining_pairs)
+    logger.info(f"Remaining pairs to compute: {len(remaining_pairs)}")
 
     # Build argument list
     work_items = []
@@ -131,34 +138,39 @@ def compute_all_pairs_phiid(activations, num_heads, tau=1,
     if max_workers == 1:
         # Sequential for debugging
         for idx, (i, j) in enumerate(tqdm(remaining_pairs, desc="PhiID pairs",
-                                           initial=completed, total=total_pairs)):
+                                           initial=num_already_done, total=total_pairs)):
             sts_val, rtr_val = _compute_single_pair(work_items[idx])
             sts_matrix[i, j] = sts_val
             sts_matrix[j, i] = sts_val
             rtr_matrix[i, j] = rtr_val
             rtr_matrix[j, i] = rtr_val
+            completed_mask[i, j] = True
+            completed_mask[j, i] = True
 
-            if save_path and (completed + idx + 1) % checkpoint_interval == 0:
-                _save_checkpoint(save_path, sts_matrix, rtr_matrix, completed + idx + 1)
+            done_count = num_already_done + idx + 1
+            if save_path and done_count % checkpoint_interval == 0:
+                _save_checkpoint(save_path, sts_matrix, rtr_matrix, completed_mask)
     else:
         with ProcessPoolExecutor(max_workers=max_workers) as executor:
             # Submit all tasks
             future_to_pair = {}
             for idx, item in enumerate(work_items):
                 future = executor.submit(_compute_single_pair, item)
-                future_to_pair[future] = (remaining_pairs[idx], completed + idx)
+                future_to_pair[future] = remaining_pairs[idx]
 
             # Collect results with progress bar
-            pbar = tqdm(total=total_pairs, initial=completed, desc="PhiID pairs")
-            done_count = completed
+            pbar = tqdm(total=total_pairs, initial=num_already_done, desc="PhiID pairs")
+            done_count = num_already_done
             for future in as_completed(future_to_pair):
-                (i, j), pair_idx = future_to_pair[future]
+                (i, j) = future_to_pair[future]
                 try:
                     sts_val, rtr_val = future.result()
                     sts_matrix[i, j] = sts_val
                     sts_matrix[j, i] = sts_val
                     rtr_matrix[i, j] = rtr_val
                     rtr_matrix[j, i] = rtr_val
+                    completed_mask[i, j] = True
+                    completed_mask[j, i] = True
                 except Exception as e:
                     logger.warning(f"Pair ({i},{j}) failed: {e}")
 
@@ -166,7 +178,7 @@ def compute_all_pairs_phiid(activations, num_heads, tau=1,
                 pbar.update(1)
 
                 if save_path and done_count % checkpoint_interval == 0:
-                    _save_checkpoint(save_path, sts_matrix, rtr_matrix, done_count)
+                    _save_checkpoint(save_path, sts_matrix, rtr_matrix, completed_mask)
 
             pbar.close()
 
@@ -175,7 +187,6 @@ def compute_all_pairs_phiid(activations, num_heads, tau=1,
         np.savez(save_path, sts_matrix=sts_matrix, rtr_matrix=rtr_matrix)
         logger.info(f"Saved pairwise PhiID to {save_path}")
         # Clean up checkpoint
-        import os
         ckpt_path = save_path.replace('.npz', '_checkpoint.npz')
         if os.path.exists(ckpt_path):
             os.remove(ckpt_path)
@@ -183,9 +194,10 @@ def compute_all_pairs_phiid(activations, num_heads, tau=1,
     return sts_matrix, rtr_matrix
 
 
-def _save_checkpoint(save_path, sts_matrix, rtr_matrix, completed):
-    """Save intermediate checkpoint."""
+def _save_checkpoint(save_path, sts_matrix, rtr_matrix, completed_mask):
+    """Save intermediate checkpoint with pair-level completion tracking."""
     ckpt_path = save_path.replace('.npz', '_checkpoint.npz')
     np.savez(ckpt_path, sts_matrix=sts_matrix, rtr_matrix=rtr_matrix,
-             completed=np.array(completed))
-    logger.info(f"Checkpoint saved: {completed} pairs completed")
+             completed_mask=completed_mask)
+    num_done = int(completed_mask.sum()) // 2  # symmetric matrix, count unique pairs
+    logger.info(f"Checkpoint saved: {num_done} pairs completed")

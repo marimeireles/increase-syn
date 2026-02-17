@@ -27,6 +27,31 @@ def get_device(device_config: str = "auto") -> torch.device:
     return torch.device(device_config)
 
 
+def _is_gemma3_model(model_name: str) -> bool:
+    """Check if model_name refers to a Gemma 3 model (HF ID or local path)."""
+    name_lower = model_name.lower()
+    # Direct HF ID match
+    if "gemma-3" in name_lower or "gemma3" in name_lower:
+        return True
+    # Local path: check config.json if it exists
+    config_path = os.path.join(model_name, "config.json")
+    if os.path.isfile(config_path):
+        import json
+        try:
+            with open(config_path) as f:
+                cfg = json.load(f)
+            model_type = cfg.get("model_type", "")
+            # Check text_config nesting too
+            if model_type in ("gemma3", "gemma3_text"):
+                return True
+            text_cfg = cfg.get("text_config", {})
+            if text_cfg.get("model_type", "") in ("gemma3", "gemma3_text"):
+                return True
+        except (json.JSONDecodeError, OSError):
+            pass
+    return False
+
+
 def load_model_and_tokenizer(model_name: str, device: torch.device = None,
                               revision: str = None, torch_dtype: str = "float32",
                               hf_token: str = None):
@@ -65,7 +90,19 @@ def load_model_and_tokenizer(model_name: str, device: torch.device = None,
         local_files_only=local_only,
         token=hf_token,
     )
-    model = AutoModelForCausalLM.from_pretrained(
+
+    # Gemma 3 models need explicit Gemma3ForCausalLM for reliable loading
+    model_cls = AutoModelForCausalLM
+    if _is_gemma3_model(model_name):
+        try:
+            from transformers import Gemma3ForCausalLM
+            model_cls = Gemma3ForCausalLM
+            logger.info("Using Gemma3ForCausalLM for Gemma 3 model")
+        except ImportError:
+            logger.warning("Gemma3ForCausalLM not available, falling back to AutoModelForCausalLM. "
+                           "Consider upgrading transformers >= 4.53.0")
+
+    model = model_cls.from_pretrained(
         model_name,
         revision=revision,
         torch_dtype=pt_dtype,
