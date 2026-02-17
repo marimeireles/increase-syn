@@ -10,8 +10,7 @@ import os
 import torch
 from datasets import Dataset
 from peft import LoraConfig, get_peft_model
-from transformers import TrainingArguments
-from trl import SFTTrainer
+from trl import SFTTrainer, SFTConfig
 
 logger = logging.getLogger(__name__)
 
@@ -27,9 +26,9 @@ def create_lora_config(config: dict) -> LoraConfig:
     )
 
 
-def create_training_args(config: dict, output_dir: str) -> TrainingArguments:
-    """Create training arguments from fine-tuning config."""
-    return TrainingArguments(
+def create_training_args(config: dict, output_dir: str) -> SFTConfig:
+    """Create SFT training config."""
+    return SFTConfig(
         output_dir=output_dir,
         num_train_epochs=config["num_epochs"],
         per_device_train_batch_size=config["per_device_train_batch_size"],
@@ -45,6 +44,8 @@ def create_training_args(config: dict, output_dir: str) -> TrainingArguments:
         report_to="none",
         seed=config["seed"],
         dataloader_pin_memory=False,
+        max_length=config["max_seq_length"],
+        dataset_text_field="text",
     )
 
 
@@ -86,7 +87,6 @@ def run_finetuning(model, tokenizer, training_examples: list, config: dict):
         args=training_args,
         train_dataset=dataset,
         processing_class=tokenizer,
-        max_seq_length=config["max_seq_length"],
     )
 
     logger.info("Starting fine-tuning...")

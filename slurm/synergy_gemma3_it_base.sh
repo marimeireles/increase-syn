@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=gemma3it-phiid
-#SBATCH --account=def-bhrett
+#SBATCH --account=def-zhijing
 #SBATCH --time=24:00:00
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=32

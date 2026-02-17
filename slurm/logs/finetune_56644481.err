@@ -1,0 +1,27 @@
+2026-02-17 03:48:57 [INFO] __main__: Loading MMLU-Pro...
+Using the latest cached version of the dataset since TIGER-Lab/MMLU-Pro couldn't be found on the Hugging Face Hub (offline mode is enabled).
+2026-02-17 03:48:57 [WARNING] datasets.load: Using the latest cached version of the dataset since TIGER-Lab/MMLU-Pro couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'default' at /home/marimeir/.cache/huggingface/datasets/TIGER-Lab___mmlu-pro/default/0.0.0/527feea0afed1de15a8c115abf7be4c912123315 (last modified on Tue Feb 17 03:42:52 2026).
+2026-02-17 03:48:57 [WARNING] datasets.packaged_modules.cache.cache: Found the latest cached dataset configuration 'default' at /home/marimeir/.cache/huggingface/datasets/TIGER-Lab___mmlu-pro/default/0.0.0/527feea0afed1de15a8c115abf7be4c912123315 (last modified on Tue Feb 17 03:42:52 2026).
+2026-02-17 03:48:57 [INFO] __main__: MMLU-Pro: 500 train, 250 test
+2026-02-17 03:48:57 [INFO] __main__: Loading GSM8K...
+Using the latest cached version of the dataset since openai/gsm8k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+2026-02-17 03:48:57 [WARNING] datasets.load: Using the latest cached version of the dataset since openai/gsm8k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'main' at /home/marimeir/.cache/huggingface/datasets/openai___gsm8k/main/0.0.0/cc7b047b6e5bb11b4f1af84efc572db110a51b3c (last modified on Tue Feb 17 03:42:53 2026).
+2026-02-17 03:48:57 [WARNING] datasets.packaged_modules.cache.cache: Found the latest cached dataset configuration 'main' at /home/marimeir/.cache/huggingface/datasets/openai___gsm8k/main/0.0.0/cc7b047b6e5bb11b4f1af84efc572db110a51b3c (last modified on Tue Feb 17 03:42:53 2026).
+2026-02-17 03:48:57 [INFO] __main__: GSM8K: 500 train, 250 test
+2026-02-17 03:48:57 [INFO] __main__: Loading TriviaQA...
+Using the latest cached version of the dataset since mandarjoshi/trivia_qa couldn't be found on the Hugging Face Hub (offline mode is enabled).
+2026-02-17 03:48:57 [WARNING] datasets.load: Using the latest cached version of the dataset since mandarjoshi/trivia_qa couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'rc.nocontext' at /home/marimeir/.cache/huggingface/datasets/mandarjoshi___trivia_qa/rc.nocontext/0.0.0/0f7faf33a3908546c6fd5b73a660e0f8ff173c2f (last modified on Tue Feb 17 03:42:57 2026).
+2026-02-17 03:48:57 [WARNING] datasets.packaged_modules.cache.cache: Found the latest cached dataset configuration 'rc.nocontext' at /home/marimeir/.cache/huggingface/datasets/mandarjoshi___trivia_qa/rc.nocontext/0.0.0/0f7faf33a3908546c6fd5b73a660e0f8ff173c2f (last modified on Tue Feb 17 03:42:57 2026).
+2026-02-17 03:48:58 [INFO] __main__: TriviaQA: 200 train, 100 test
+2026-02-17 03:48:58 [INFO] __main__: Total: 1200 train, 600 test
+2026-02-17 03:48:58 [INFO] __main__: Saved 600 test questions to results/finetuning/eval/test_questions.json
+2026-02-17 03:48:58 [INFO] __main__: Loading Gemma 3 4B-IT for consistency scoring...
+2026-02-17 03:48:58 [INFO] src.utils: Loading model: google/gemma-3-4b-it with dtype=bfloat16
+2026-02-17 03:49:03 [INFO] src.utils: Using Gemma3ForCausalLM for Gemma 3 model
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:17<00:17, 17.56s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:40<00:00, 20.72s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:40<00:00, 20.25s/it]
+2026-02-17 03:50:35 [INFO] src.utils: Model loaded on cuda. Parameters: 3,880,263,168
+2026-02-17 03:50:35 [INFO] __main__: Scoring training questions for consistency...
+Consistency scoring:   0%|          | 0/1200 [00:00<?, ?it/s]slurmstepd: error: *** JOB 56644481 ON ng31001 CANCELLED AT 2026-02-17T08:50:53 ***
