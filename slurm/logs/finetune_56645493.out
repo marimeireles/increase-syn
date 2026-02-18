@@ -4,3 +4,35 @@ Node: ng20204
 GPU: NVIDIA A100-SXM4-40GB
 --- Phase F1: Prepare fine-tuning data ---
 Tue Feb 17 04:39:33 AM EST 2026
+--- Phase F2: LoRA fine-tuning ---
+Tue Feb 17 08:51:41 AM EST 2026
+{'loss': 3.3787, 'grad_norm': 1.282684326171875, 'learning_rate': 0.00019996030906921302, 'num_tokens': 56948.0, 'mean_token_accuracy': 0.5315004795789718, 'epoch': 0.22}
+{'loss': 1.7065, 'grad_norm': 0.7997741103172302, 'learning_rate': 0.0001985744319684625, 'num_tokens': 116110.0, 'mean_token_accuracy': 0.6430103823542594, 'epoch': 0.44}
+{'loss': 1.2605, 'grad_norm': 0.44831231236457825, 'learning_rate': 0.00019523540348799885, 'num_tokens': 171984.0, 'mean_token_accuracy': 0.7280850753188133, 'epoch': 0.66}
+{'loss': 1.1887, 'grad_norm': 0.39826953411102295, 'learning_rate': 0.00019000938305631975, 'num_tokens': 231332.0, 'mean_token_accuracy': 0.7391086325049401, 'epoch': 0.88}
+{'loss': 1.0534, 'grad_norm': 0.30336993932724, 'learning_rate': 0.00018299991891420847, 'num_tokens': 284219.0, 'mean_token_accuracy': 0.7489038533286044, 'epoch': 1.09}
+{'loss': 1.0372, 'grad_norm': 0.28809404373168945, 'learning_rate': 0.00017434589641242813, 'num_tokens': 342154.0, 'mean_token_accuracy': 0.7514759421348571, 'epoch': 1.31}
+{'loss': 1.0634, 'grad_norm': 0.31191304326057434, 'learning_rate': 0.00016421878614078468, 'num_tokens': 399962.0, 'mean_token_accuracy': 0.7502610377967358, 'epoch': 1.53}
+{'loss': 0.9996, 'grad_norm': 0.2997226119041443, 'learning_rate': 0.000152819246414062, 'num_tokens': 455810.0, 'mean_token_accuracy': 0.7579735077917575, 'epoch': 1.75}
+{'loss': 1.0012, 'grad_norm': 0.3300066888332367, 'learning_rate': 0.0001403731474330893, 'num_tokens': 513049.0, 'mean_token_accuracy': 0.7582784667611122, 'epoch': 1.97}
+{'loss': 0.9835, 'grad_norm': 0.33891525864601135, 'learning_rate': 0.0001271270958981163, 'num_tokens': 567273.0, 'mean_token_accuracy': 0.7628111494214911, 'epoch': 2.18}
+{'loss': 0.9534, 'grad_norm': 0.45933282375335693, 'learning_rate': 0.0001133435487496969, 'num_tokens': 622826.0, 'mean_token_accuracy': 0.7651695556938648, 'epoch': 2.4}
+{'loss': 0.9434, 'grad_norm': 0.4087992012500763, 'learning_rate': 9.929561285329999e-05, 'num_tokens': 684736.0, 'mean_token_accuracy': 0.771042038500309, 'epoch': 2.62}
+{'loss': 0.9111, 'grad_norm': 0.4927199184894562, 'learning_rate': 8.526163366656858e-05, 'num_tokens': 740881.0, 'mean_token_accuracy': 0.7762492738664151, 'epoch': 2.84}
+{'loss': 0.9221, 'grad_norm': 0.4622167646884918, 'learning_rate': 7.151968010924249e-05, 'num_tokens': 794157.0, 'mean_token_accuracy': 0.7714201713863172, 'epoch': 3.04}
+{'loss': 0.9103, 'grad_norm': 0.44296205043792725, 'learning_rate': 5.834203491239574e-05, 'num_tokens': 851924.0, 'mean_token_accuracy': 0.7743425868451596, 'epoch': 3.26}
+{'loss': 0.8662, 'grad_norm': 0.5379943251609802, 'learning_rate': 4.598979961507471e-05, 'num_tokens': 906896.0, 'mean_token_accuracy': 0.7856019653379918, 'epoch': 3.48}
+{'loss': 0.8537, 'grad_norm': 0.5906376838684082, 'learning_rate': 3.4707721104801175e-05, 'num_tokens': 964028.0, 'mean_token_accuracy': 0.789020761847496, 'epoch': 3.7}
+{'loss': 0.8892, 'grad_norm': 0.5773816108703613, 'learning_rate': 2.4719342208739693e-05, 'num_tokens': 1022883.0, 'mean_token_accuracy': 0.7798004299402237, 'epoch': 3.92}
+{'loss': 0.87, 'grad_norm': 0.5774363279342651, 'learning_rate': 1.622257242159756e-05, 'num_tokens': 1079710.0, 'mean_token_accuracy': 0.786166931453504, 'epoch': 4.13}
+{'loss': 0.8322, 'grad_norm': 0.5410536527633667, 'learning_rate': 9.385766531746054e-06, 'num_tokens': 1135493.0, 'mean_token_accuracy': 0.7898644767701626, 'epoch': 4.35}
+{'loss': 0.8289, 'grad_norm': 0.612572968006134, 'learning_rate': 4.344388843568503e-06, 'num_tokens': 1189788.0, 'mean_token_accuracy': 0.7951748788356781, 'epoch': 4.57}
+{'loss': 0.874, 'grad_norm': 0.5656518936157227, 'learning_rate': 1.198329091052608e-06, 'num_tokens': 1248226.0, 'mean_token_accuracy': 0.7847599171102047, 'epoch': 4.79}
+{'loss': 0.82, 'grad_norm': 0.8829785585403442, 'learning_rate': 9.923225048724671e-09, 'num_tokens': 1303925.0, 'mean_token_accuracy': 0.7951135227554723, 'epoch': 5.0}
+{'train_runtime': 676.3417, 'train_samples_per_second': 10.742, 'train_steps_per_second': 0.34, 'train_loss': 1.0933656733968984, 'epoch': 5.0}
+--- Phase F3: Evaluate calibration ---
+Tue Feb 17 09:04:50 AM EST 2026
+--- Phase F4: Merge LoRA adapter ---
+Tue Feb 17 09:30:25 AM EST 2026
+=== Complete ===
+End time: Tue Feb 17 09:31:28 AM EST 2026

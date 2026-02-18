@@ -76,7 +76,7 @@ class HeadActivationExtractor:
                     norms = torch.norm(last_pos, dim=-1)  # L2 norm over head_dim
 
                     # Store norms (take batch dim 0 since batch=1)
-                    self._current_step_norms[l_idx] = norms[0].detach().cpu().numpy()
+                    self._current_step_norms[l_idx] = norms[0].detach().cpu().float().numpy()
 
                 return hook_fn
 

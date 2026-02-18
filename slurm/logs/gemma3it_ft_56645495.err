@@ -1,0 +1,127 @@
+2026-02-17 09:31:47 [INFO] __main__: Pipeline: model=gemma3-4b-it-ft, revision=None, phases=[1, 2, 3, 4, 6], device=cuda
+2026-02-17 09:31:47 [INFO] __main__: ============================================================
+2026-02-17 09:31:47 [INFO] __main__: Starting Phase 1
+2026-02-17 09:31:47 [INFO] __main__: ============================================================
+2026-02-17 09:31:47 [INFO] src.utils: Loading model: results/finetuning/merged_model with dtype=bfloat16
+2026-02-17 09:31:52 [INFO] src.utils: Using Gemma3ForCausalLM for Gemma 3 model
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.78s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.22s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.30s/it]
+2026-02-17 09:32:15 [INFO] src.utils: Model loaded on cuda. Parameters: 3,880,263,168
+2026-02-17 09:32:15 [INFO] src.model_registry: Detected gemma3: 34 layers, 8 heads/layer, head_dim=256, total_heads=272, hidden=2560, vocab=262208
+2026-02-17 09:32:15 [INFO] __main__: Extracting activations for 60 prompts, 100 tokens each
+Extracting activations:   0%|          | 0/60 [00:00<?, ?it/s]2026-02-17 09:32:15 [INFO] src.activation_extraction: Prompt 1/60: Correct the error: He go to school every day....
+Extracting activations:   0%|          | 0/60 [00:01<?, ?it/s]
+2026-02-17 09:32:16 [ERROR] __main__: Phase 1 failed: Got unsupported ScalarType BFloat16
+Traceback (most recent call last):
+  File "/lustre07/scratch/marimeir/increase-syn/scripts/run_pipeline.py", line 551, in main
+    phase_map[phase_num]()
+  File "/lustre07/scratch/marimeir/increase-syn/scripts/run_pipeline.py", line 535, in <lambda>
+    1: lambda: phase1_extract(config, device, args.revision, hf_token),
+  File "/lustre07/scratch/marimeir/increase-syn/scripts/run_pipeline.py", line 86, in phase1_extract
+    all_activations, all_tokens, all_logits = extractor.extract_all_prompts(
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/lustre07/scratch/marimeir/increase-syn/src/activation_extraction.py", line 181, in extract_all_prompts
+    activations, tokens, logits = self.generate_and_extract(prompt, num_tokens)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/lustre07/scratch/marimeir/increase-syn/src/activation_extraction.py", line 120, in generate_and_extract
+    outputs = self.model(
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/transformers/utils/generic.py", line 961, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/transformers/models/gemma3/modeling_gemma3.py", line 658, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/transformers/utils/generic.py", line 1069, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/transformers/models/gemma3/modeling_gemma3.py", line 559, in forward
+    layer_outputs = decoder_layer(
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/transformers/modeling_layers.py", line 94, in __call__
+    return super().__call__(*args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/transformers/models/gemma3/modeling_gemma3.py", line 393, in forward
+    hidden_states, self_attn_weights = self.self_attn(
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/transformers/models/gemma3/modeling_gemma3.py", line 351, in forward
+    attn_output = self.o_proj(attn_output)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1803, in inner
+    hook_result = hook(self, args, result)
+  File "/lustre07/scratch/marimeir/increase-syn/src/activation_extraction.py", line 79, in hook_fn
+    self._current_step_norms[l_idx] = norms[0].detach().cpu().numpy()
+TypeError: Got unsupported ScalarType BFloat16
+Traceback (most recent call last):
+  File "/lustre07/scratch/marimeir/increase-syn/scripts/run_pipeline.py", line 558, in <module>
+    main()
+  File "/lustre07/scratch/marimeir/increase-syn/scripts/run_pipeline.py", line 551, in main
+    phase_map[phase_num]()
+  File "/lustre07/scratch/marimeir/increase-syn/scripts/run_pipeline.py", line 535, in <lambda>
+    1: lambda: phase1_extract(config, device, args.revision, hf_token),
+  File "/lustre07/scratch/marimeir/increase-syn/scripts/run_pipeline.py", line 86, in phase1_extract
+    all_activations, all_tokens, all_logits = extractor.extract_all_prompts(
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/lustre07/scratch/marimeir/increase-syn/src/activation_extraction.py", line 181, in extract_all_prompts
+    activations, tokens, logits = self.generate_and_extract(prompt, num_tokens)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/lustre07/scratch/marimeir/increase-syn/src/activation_extraction.py", line 120, in generate_and_extract
+    outputs = self.model(
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/transformers/utils/generic.py", line 961, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/transformers/models/gemma3/modeling_gemma3.py", line 658, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/transformers/utils/generic.py", line 1069, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/transformers/models/gemma3/modeling_gemma3.py", line 559, in forward
+    layer_outputs = decoder_layer(
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/transformers/modeling_layers.py", line 94, in __call__
+    return super().__call__(*args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/transformers/models/gemma3/modeling_gemma3.py", line 393, in forward
+    hidden_states, self_attn_weights = self.self_attn(
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/transformers/models/gemma3/modeling_gemma3.py", line 351, in forward
+    attn_output = self.o_proj(attn_output)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/home/marimeir/micromamba/envs/syn/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1803, in inner
+    hook_result = hook(self, args, result)
+  File "/lustre07/scratch/marimeir/increase-syn/src/activation_extraction.py", line 79, in hook_fn
+    self._current_step_norms[l_idx] = norms[0].detach().cpu().numpy()
+TypeError: Got unsupported ScalarType BFloat16
