@@ -491,6 +491,7 @@ def _infer_architecture(total_heads, model_id):
         "gemma3_4b": (8, 34),
         "gemma3_4b_it": (8, 34),
         "gemma3_4b_it_ft": (8, 34),
+        "gemma3_4b_it_random_ctrl": (8, 34),
         "qwen3_8b": (32, 36),
     }
     if model_id in known:
@@ -506,7 +507,7 @@ def _infer_architecture(total_heads, model_id):
 def main():
     parser = argparse.ArgumentParser(description="Multi-model PhiID pipeline runner")
     parser.add_argument("--model", required=True,
-                        choices=["pythia-1b", "gemma3-4b", "gemma3-4b-it", "gemma3-4b-it-ft", "qwen3-8b"],
+                        choices=["pythia-1b", "gemma3-4b", "gemma3-4b-it", "gemma3-4b-it-ft", "gemma3-4b-it-random-ctrl", "qwen3-8b"],
                         help="Model to analyze")
     parser.add_argument("--revision", default=None,
                         help="Model revision (e.g., step1000 for Pythia checkpoints)")

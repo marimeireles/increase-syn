@@ -72,6 +72,11 @@ MODEL_CONFIGS = {
         "model_id": "gemma3_4b_it_ft",
         "torch_dtype": "bfloat16",
     },
+    "gemma3-4b-it-random-ctrl": {
+        "model_name": "results/rm-confounding-factors/merged_model",
+        "model_id": "gemma3_4b_it_random_ctrl",
+        "torch_dtype": "bfloat16",
+    },
 }
 
 # Pythia-1B training checkpoints for Figure 3a
