@@ -14,7 +14,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.utils import set_seed, setup_logging, load_model_and_tokenizer, get_device
+from src.utils import set_seed, setup_logging
 from finetuning.config_control import CTRL_FT_CONFIG
 from finetuning.config import FT_CONFIG
 from finetuning.data_preparation_control import assign_random_confidence_targets
@@ -60,13 +60,10 @@ def main():
         seed=123,  # different from main seed to avoid correlation
     )
 
-    # Load tokenizer for chat template formatting
-    # (only needs the tokenizer, not the full model weights)
-    device = get_device()
+    # Load tokenizer for chat template formatting (no need for full model)
+    from transformers import AutoTokenizer
     logger.info("Loading tokenizer for chat template formatting...")
-    _, tokenizer = load_model_and_tokenizer(
-        config["base_model"], device, torch_dtype="bfloat16",
-    )
+    tokenizer = AutoTokenizer.from_pretrained(config["base_model"])
 
     # Build training examples using the SAME format as metacog
     training_examples = build_training_examples(

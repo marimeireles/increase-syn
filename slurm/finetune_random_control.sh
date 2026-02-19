@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=random-ctrl-ft
 #SBATCH --account=def-zhijing
-#SBATCH --time=36:00:00
+#SBATCH --time=18:00:00
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=32
 #SBATCH --mem=64G

@@ -31,7 +31,7 @@ def main():
     if os.path.exists(os.path.join(merged_dir, "config.json")):
         logger.info(f"Merged model already exists at {merged_dir}. Verifying...")
         model, tokenizer = load_model_and_tokenizer(
-            merged_dir, torch_dtype="bfloat16",
+            merged_dir, device=None, torch_dtype="bfloat16",
         )
         spec = detect_model_spec(model)
         logger.info(
