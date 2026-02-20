@@ -1,0 +1,10 @@
+=== Random Control: Ablation + Comparison (GPU) ===
+Start time: Thu Feb 19 12:03:00 PM EST 2026
+Node: ng10703
+GPU: NVIDIA A100-SXM4-40GB
+--- Phases 4,6: ablation + viz ---
+Thu Feb 19 12:03:00 PM EST 2026
+--- Three-way comparison ---
+Thu Feb 19 03:33:55 PM EST 2026
+=== Complete ===
+End time: Thu Feb 19 03:34:13 PM EST 2026

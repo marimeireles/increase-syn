@@ -1,0 +1,41 @@
+=== Random-Confidence Control Fine-tuning Pipeline ===
+Start time: Wed Feb 18 08:11:00 AM EST 2026
+Node: ng31003
+GPU: NVIDIA A100-SXM4-40GB
+--- Step 1: Prepare random-confidence training data ---
+Wed Feb 18 08:11:00 AM EST 2026
+--- Step 2: LoRA fine-tuning (random confidence) ---
+Wed Feb 18 08:11:21 AM EST 2026
+{'loss': 3.1947, 'grad_norm': 1.3024604320526123, 'learning_rate': 0.00019999252866697325, 'num_tokens': 67574.0, 'mean_token_accuracy': 0.5510702855885029, 'epoch': 0.19}
+{'loss': 1.6945, 'grad_norm': 0.8087213635444641, 'learning_rate': 0.00019909731878054056, 'num_tokens': 134182.0, 'mean_token_accuracy': 0.6427164442837239, 'epoch': 0.38}
+{'loss': 1.3016, 'grad_norm': 0.34312620759010315, 'learning_rate': 0.00019672315533890932, 'num_tokens': 199198.0, 'mean_token_accuracy': 0.7222502656280995, 'epoch': 0.57}
+{'loss': 1.138, 'grad_norm': 0.4842787981033325, 'learning_rate': 0.000192905470960296, 'num_tokens': 261887.0, 'mean_token_accuracy': 0.7441686861217022, 'epoch': 0.77}
+{'loss': 1.0849, 'grad_norm': 0.29469776153564453, 'learning_rate': 0.00018770124173602025, 'num_tokens': 322728.0, 'mean_token_accuracy': 0.7456704705953598, 'epoch': 0.96}
+{'loss': 1.0644, 'grad_norm': 0.2669123709201813, 'learning_rate': 0.00018118813690484685, 'num_tokens': 381596.0, 'mean_token_accuracy': 0.7480226690704758, 'epoch': 1.13}
+{'loss': 1.0581, 'grad_norm': 0.31583139300346375, 'learning_rate': 0.00017346335969753898, 'num_tokens': 442244.0, 'mean_token_accuracy': 0.7497294485569, 'epoch': 1.33}
+{'loss': 1.0613, 'grad_norm': 0.30443811416625977, 'learning_rate': 0.0001646421966511539, 'num_tokens': 508808.0, 'mean_token_accuracy': 0.7473160102963448, 'epoch': 1.52}
+{'loss': 1.0057, 'grad_norm': 0.38759687542915344, 'learning_rate': 0.00015485629704348224, 'num_tokens': 574634.0, 'mean_token_accuracy': 0.7571219116449356, 'epoch': 1.71}
+{'loss': 0.9985, 'grad_norm': 0.31400996446609497, 'learning_rate': 0.00014425170812578837, 'num_tokens': 641306.0, 'mean_token_accuracy': 0.7586956650018692, 'epoch': 1.9}
+{'loss': 0.9808, 'grad_norm': 0.3270806670188904, 'learning_rate': 0.00013298669547653848, 'num_tokens': 697659.0, 'mean_token_accuracy': 0.7583524794191927, 'epoch': 2.08}
+{'loss': 0.9606, 'grad_norm': 0.3326149582862854, 'learning_rate': 0.00012122938100570938, 'num_tokens': 759975.0, 'mean_token_accuracy': 0.7633915200829506, 'epoch': 2.27}
+{'loss': 0.9759, 'grad_norm': 0.3395088315010071, 'learning_rate': 0.00010915523386070277, 'num_tokens': 828931.0, 'mean_token_accuracy': 0.7640172183513642, 'epoch': 2.46}
+{'loss': 0.9608, 'grad_norm': 0.3815746605396271, 'learning_rate': 9.694445168022213e-05, 'num_tokens': 894778.0, 'mean_token_accuracy': 0.7642189942300319, 'epoch': 2.65}
+{'loss': 0.9717, 'grad_norm': 0.4194149971008301, 'learning_rate': 8.477927127894424e-05, 'num_tokens': 957932.0, 'mean_token_accuracy': 0.7638289295136929, 'epoch': 2.84}
+{'loss': 0.9171, 'grad_norm': 0.41238459944725037, 'learning_rate': 7.284124889901074e-05, 'num_tokens': 1017982.0, 'mean_token_accuracy': 0.7715289085297972, 'epoch': 3.02}
+{'loss': 0.8855, 'grad_norm': 0.46736910939216614, 'learning_rate': 6.130855061855676e-05, 'num_tokens': 1081428.0, 'mean_token_accuracy': 0.7803985424339771, 'epoch': 3.21}
+{'loss': 0.9308, 'grad_norm': 0.4861047565937042, 'learning_rate': 5.035329335590868e-05, 'num_tokens': 1148276.0, 'mean_token_accuracy': 0.7746922910213471, 'epoch': 3.4}
+{'loss': 0.925, 'grad_norm': 0.5470718145370483, 'learning_rate': 4.013897615297889e-05, 'num_tokens': 1212524.0, 'mean_token_accuracy': 0.7705520085990429, 'epoch': 3.59}
+{'loss': 0.8582, 'grad_norm': 0.47967708110809326, 'learning_rate': 3.0818040074037305e-05, 'num_tokens': 1279172.0, 'mean_token_accuracy': 0.7849228642880917, 'epoch': 3.78}
+{'loss': 0.8968, 'grad_norm': 0.5072066187858582, 'learning_rate': 2.2529593136549622e-05, 'num_tokens': 1341928.0, 'mean_token_accuracy': 0.7766464531421662, 'epoch': 3.98}
+{'loss': 0.8585, 'grad_norm': 0.5215335488319397, 'learning_rate': 1.539733422779269e-05, 'num_tokens': 1401942.0, 'mean_token_accuracy': 0.784600905469946, 'epoch': 4.15}
+{'loss': 0.8724, 'grad_norm': 0.5690326690673828, 'learning_rate': 9.527706991242502e-06, 'num_tokens': 1464696.0, 'mean_token_accuracy': 0.783302354067564, 'epoch': 4.34}
+{'loss': 0.8773, 'grad_norm': 0.5183936357498169, 'learning_rate': 5.00831123460338e-06, 'num_tokens': 1531627.0, 'mean_token_accuracy': 0.7820934429764748, 'epoch': 4.54}
+{'loss': 0.8518, 'grad_norm': 0.5234927535057068, 'learning_rate': 1.9065955680282243e-06, 'num_tokens': 1596744.0, 'mean_token_accuracy': 0.7866489335894584, 'epoch': 4.73}
+{'loss': 0.8576, 'grad_norm': 0.5090842247009277, 'learning_rate': 2.6885078392945297e-07, 'num_tokens': 1658342.0, 'mean_token_accuracy': 0.7850462920963764, 'epoch': 4.92}
+{'train_runtime': 817.0748, 'train_samples_per_second': 10.226, 'train_steps_per_second': 0.324, 'train_loss': 1.080233737657655, 'num_tokens': 1686475.0, 'mean_token_accuracy': 0.7774300049333012, 'epoch': 5.0}
+--- Step 3: Evaluate calibration ---
+Wed Feb 18 08:26:34 AM EST 2026
+--- Step 4: Merge LoRA adapter ---
+Wed Feb 18 08:51:30 AM EST 2026
+--- Step 5: Synergy pipeline on random-control model ---
+Wed Feb 18 08:52:32 AM EST 2026
